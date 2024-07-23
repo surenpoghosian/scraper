@@ -41,7 +41,4 @@ class Main {
   }
 };
 
-// const main = new Main();
-// main.run();
-
 export default Main;
