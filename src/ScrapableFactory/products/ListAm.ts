@@ -23,7 +23,10 @@ class ListAm implements Scrapable {
       console.error('scraped html is not valid');
     }
 
-    const nextLinkExists = data.querySelectorAll('a').some(a => a.text.trim() === 'Հաջորդը >');
+    const nextLinkExists = data.querySelectorAll('a').some(a => {
+      const text = a.text.trim();
+      return text === 'Հաջորդը >' || text === 'Next >' || text === 'Следующая >';
+  });
 
     if (!nextLinkExists) {
       throw new Error('...it was the last page');
