@@ -1,7 +1,6 @@
 import { HTMLElement } from "node-html-parser";
 
 export interface Scrapable {
-  scraper: IScraper;
   scrape: (scrapeId: string, path: string, scrapeType: ScrapeType) => void;
 }
 
@@ -55,7 +54,7 @@ export enum ListAmCurrency {
 }
 
 export enum ListAmGeolocation {
-  YEREVAN = 'n=1',         // n=1 Yerevan
+  YEREVAN = 'n=1',          // n=1 Yerevan
   AJAPNYAK = 'n=2',         // n=2 Yerevan/Ajapnyak
   ARABKIR = 'n=3',          // n=3 Yerevan/Arabkir
   AVAN = 'n=4',             // n=4 Yerevan/Avan
@@ -78,4 +77,14 @@ export enum ListAmSellerType {
 export enum ListAmCategory {
   PARKING_LOT_AND_GARAGE_RENT = '175',
   ROOM_FOR_A_RENT = '212',
+}
+
+export interface IScrapeValidator {
+  validate(html: HTMLElement, scrapeType: ScrapeType): boolean;
+}
+
+
+export enum ScrapeValidatorVariant {
+  LISTAM,
+  MOBILECENTRE,
 }

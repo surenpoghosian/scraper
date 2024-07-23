@@ -1,12 +1,13 @@
-import ScrapersFactory from "../../ScrapersFactory";
-import { IScraper, Scrapable, ScraperType, ScrapeType } from "../../configs/types";
+import { IScraper, IScrapeValidator, Scrapable, ScrapeType } from "../../configs/types";
 import { ListAmBaseURL as baseUrl } from '../../configs/constants';
 
 class ListAm implements Scrapable {
-  public scraper: IScraper;
+  private scraper: IScraper;
+  private validator: IScrapeValidator;
 
-  constructor(scraper: IScraper) {
+  constructor(scraper: IScraper, validator: IScrapeValidator) {
     this.scraper = scraper;
+    this.validator = validator;
   }
 
   scrape = async (scrapeId: string, path: string, scrapeType: ScrapeType) => {
@@ -14,31 +15,21 @@ class ListAm implements Scrapable {
 
     const data = this.scraper.parse(html);
 
-    if (scrapeType === ScrapeType.ITEM) {
-      const price = data.querySelector('.xprice')?.rawText;
-      const description = data.querySelector('.body')?.rawText;
+    const isHtmlValid = this.validator.validate(data, scrapeType);
 
-      const otherDetails = data.querySelectorAll('.c')
-        .map(item => {
-          return {
-            key: item.querySelector('.t')?.rawText,
-            data: item.querySelector('.i')?.rawText,
-          };
-        })
-        .filter(item => item.key !== undefined && item.data !== undefined) as { key: string; data: string }[];
+    if (isHtmlValid) {
+      await this.scraper.save({ scrapeId, baseUrl, path, scrapeType, html });
+    } else {
+      console.error('scraped html is not valid');
+    }
 
-      await this.scraper.save({ scrapeId, baseUrl, path, scrapeType, html, price, description, otherDetails });
+    const nextLinkExists = data.querySelectorAll('a').some(a => {
+      const text = a.text.trim();
+      return text === 'Հաջորդը >' || text === 'Next >' || text === 'Следующая >';
+  });
 
-    } else if (scrapeType === ScrapeType.LIST) {
-      const parentDivs = data.querySelectorAll('.gl');
-      console.log({html, parentDivs})
-      if (!parentDivs.length) {
-        throw new Error('Parent div not found');
-      }
-  
-      const hrefs = parentDivs.map(item => item.querySelectorAll('a').map(link => link.getAttribute('href')));
-
-      await this.scraper.save({ scrapeId, baseUrl, path, scrapeType, html, hrefs });
+    if (!nextLinkExists) {
+      throw new Error('...it was the last page');
     }
   };
 };
