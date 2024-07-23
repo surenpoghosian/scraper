@@ -28,33 +28,6 @@ class ListAm implements Scrapable {
     if (!nextLinkExists) {
       throw new Error('...it was the last page');
     }
-
-    // if (scrapeType === ScrapeType.ITEM) {
-      // const price = data.querySelector('.xprice')?.rawText;
-      // const description = data.querySelector('.body')?.rawText;
-
-      // const otherDetails = data.querySelectorAll('.c')
-      //   .map(item => {
-      //     return {
-      //       key: item.querySelector('.t')?.rawText,
-      //       data: item.querySelector('.i')?.rawText,
-      //     };
-      //   })
-      //   .filter(item => item.key !== undefined && item.data !== undefined) as { key: string; data: string }[];
-
-      // await this.scraper.save({ scrapeId, baseUrl, path, scrapeType, html, price, description, otherDetails });
-
-    // } else if (scrapeType === ScrapeType.LIST) {
-    //   const parentDivs = data.querySelectorAll('.gl');
-
-    //   if (!parentDivs.length) {
-    //     throw new Error('Parent div not found');
-    //   }
-
-    //   const hrefs = parentDivs.map(item => item.querySelectorAll('a').map(link => link.getAttribute('href')));
-
-    //   await this.scraper.save({ scrapeId, baseUrl, path, scrapeType, html, hrefs });
-    // }
   };
 };
 
