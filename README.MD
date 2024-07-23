@@ -16,32 +16,51 @@ The Scraper project is designed to demonstrate the practical implementation of v
 
 ```
 scraper/
-├── src/
-│   ├── factories/
-│   │   ├── ScrapersFactory.ts
-│   │   ├── ScrapableFactory.ts
-│   │   ├── PathBuilderFactory.ts
-│   │   └── ScrapeValidatorFactory.ts
-│   ├── builders/
-│   │   └── PathBuilder.ts
-│   ├── singleton/
-│   │   └── Scheduler.ts
-│   ├── scrapers/
-│   │   ├── BaseScraper.ts
-│   │   └── PuppeteerScraper.ts
-│   ├── interfaces/
-│   │   └── IScraper.ts
-│   ├── configs/
-│   │   ├── types.ts
-│   │   └── constants.ts
-│   ├── utils/
-│   │   ├── sleep.ts
-│   │   └── getRandomInterval.ts
-│   ├── main.ts
-├── tests/
-│   └── ...
-├── README.md
+├── src
+│   ├── PathBuilderFactory
+│   │   ├── index.ts
+│   │   └── products
+│   │       ├── ListAm.ts
+│   │       └── MobileCentre.ts
+│   ├── Scheduler
+│   │   └── index.ts
+│   ├── ScrapableFactory
+│   │   ├── index.ts
+│   │   └── products
+│   │       ├── ListAm.ts
+│   │       └── MobileCentre.ts
+│   ├── ScrapeValidatorFactory
+│   │   ├── index.ts
+│   │   └── products
+│   │       ├── ListAm.ts
+│   │       └── MobileCentre.ts
+│   ├── ScrapersFactory
+│   │   ├── index.ts
+│   │   └── products
+│   │       ├── Https.ts
+│   │       └── Puppetter.ts
+│   ├── __tests__
+│   │   └── pathBuilder.test.ts
+│   ├── configs
+│   │   ├── constants.ts
+│   │   └── types.ts
+│   ├── db
+│   │   ├── MongoCRUD.ts
+│   │   └── MongoDBConnection.ts
+│   ├── index.ts
+│   └── utils
+│       ├── getDateTime.ts
+│       ├── getRandomInterval.ts
+│       ├── request.ts
+│       └── sleep.ts
+├── tsconfig.json
+├── README.MD
+├── eslint.config.mjs
+├── jest.config.cjs
+├── package-lock.json
 └── package.json
+
+15 directories, 29 files
 ```
 
 ## Getting Started
