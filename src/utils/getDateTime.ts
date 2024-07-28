@@ -1,4 +1,8 @@
-const getDateTime = function() {
+/**
+ * get date and time in one string
+ * @returns The dateTime string.
+ */
+const getDateTime = () => {
   const currentTime = Date.now();
   const new_date = new Date(currentTime)
   const year = new_date.getFullYear()
