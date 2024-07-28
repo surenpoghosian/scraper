@@ -1,0 +1,10 @@
+{
+  "entryPoints": ["src/**/*.ts", "src/**/*.tsx"],
+  "out": "docs",
+  "includeVersion": true,
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "theme": "default",
+  "plugin": []
+}
