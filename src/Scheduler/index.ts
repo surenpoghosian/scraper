@@ -1,5 +1,5 @@
 import cron from 'node-cron';
-import Main from '..';
+import Main from '../main';
 
 class ScraperScheduler {
   private cronExpression: string;
