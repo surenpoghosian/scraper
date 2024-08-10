@@ -56,7 +56,7 @@ class Https implements IScraper {
         reject(new Error('Request timed out'));
       });
 
-      req.setTimeout(5000);
+      req.setTimeout(10000);
 
       req.end();
     });
